@@ -3,7 +3,7 @@ body {
           transition: background-color 0.3s, color 0.3s;
           text-align: center;
       }
-      .modo-btn{
+.modo-btn{
         float: right;
         background-color: rgb(38, 106, 148);
         display: flex;
@@ -14,7 +14,7 @@ body {
         cursor: pointer;
         width: 60px;
       }
-      .modo-btn::after{
+.modo-btn::after{
         content: "";
         display: block;
         width: 30px;
@@ -27,14 +27,14 @@ body {
         border-radius: 100px;
         transition: .5s ease all;
       }
-      .modo-btn.active{
+.modo-btn.active{
         background-color: orange;
       }
-      .modo-btn.active::after{
+.modo-btn.active::after{
         right: 0;
         left: unset;
       }
-      .modo-btn span{
+.modo-btn span{
         width: 30px;
         height: 30px;
         line-height: 30px;
@@ -42,12 +42,12 @@ body {
         background: none;
         color: black;
       }
-      .modo-dia {
+.modo-dia {
           background-color: #fff;
           color: #333;
       }
       
-      .modo-noche {
+.modo-noche {
           background-color: #333;
           color: #fff;
       }

@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/875d38da57.js" crossorigin="anonymous"></script>
     <title>Modo Día/Noche</title>
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="modo-dia">
     <header>
         <nav id="nav-bar">
-
+            <div class="container">
+                <button id="modoBtn" class="modo-btn">
+                    <span><i class="fa-regular fa-sun"></i></span>
+                    <span><i class="fa-solid fa-moon"></i></span>
+                </button>
+            </div>
         </nav>
         
     </header>
@@ -30,11 +36,6 @@
             </div>
         </section>
     </main>
-    
-    <div class="container">
-        <button id="modoBtn" class="modo-btn">Modo Día</button>
-            
-    </div>
         
 </body>
 <script src="app.js" defer></script>

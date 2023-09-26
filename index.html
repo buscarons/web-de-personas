@@ -16,18 +16,18 @@
 
     <main id="principal">
         <section id="buscador">
-            <form id="formulario" action="">
-                <li class="nav-item">
-                    <input type="search" name="search" id="busqueda" placeholder="Buscar...">
-                </li>
+            <form>
+                <input type="text" id="searchInput" placeholder="Buscar...">
+                <button type="submit">Buscar</button>
             </form>
+            <ul id="results"></ul>
 
         </section>
 
         <section id="contenedor">
-            <ul id="lista">
+            <div id="container">
 
-            </ul>
+            </div>
         </section>
     </main>
     
@@ -35,8 +35,8 @@
         <button id="modoBtn" class="modo-btn">Modo Día</button>
             
     </div>
-        <script src="app.js"></script>
+        
 </body>
-<script src="app.js"></script>
+<script src="app.js" defer></script>
 </html>
 

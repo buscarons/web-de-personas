@@ -1,22 +1,72 @@
-let buscadorFiltrado = undefined;
+async function fetchData() {
+    try {
+        //tomo el archivo json
+      const response = await fetch('./json/db.json');
+      const data = await response.json();
+        //div con id container
+      const container = document.getElementById('container');
+        //for para recorrer el json y mostrar los datos
+      for (let i = 0; i < data.length; i++) {
+        const li = document.createElement('li');
+        li.innerText = `Nombre: ${data[i].name}, Telefono: ${data[i].phone}, Ciudad: ${data[i].country}`;
+        container.appendChild(li);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
-let search = document.getElementById("formulario");
+fetchData();
 
-function buscarInfo() {
-    search.addEventListener("input", e => {
-        const inpuText = e.target.value.toUpperCase().trim();
-
-        console.log(inpuText)
-
-        buscadorFiltrado = arregloActualInfo.filter(persona => persona.name.toUpperCase().includes(inpuText) || persona.description.toUpperCase().includes(inpuText));
-        
-        // LLama a la función de Bryan con buscadorFiltrado
-    })
+  
+function displayResults(results) {
+    resultsList.innerHTML = '';
+  
+    if (results.length === 0) {
+      const li = document.createElement('li');
+      li.textContent = 'No se encontraron resultados';
+      resultsList.appendChild(li);
+    } else {
+      results.forEach(result => {
+        const li = document.createElement('li');
+        li.textContent = `Nombre: ${result.name}, Telefono: ${result.phone}, Ciudad: ${result.country}`;
+        resultsList.appendChild(li);
+      });
+    }
 }
 
-document.addEventListener("DOMContentLoaded", function(e) {
-    // Funcion fetch que llama a buscarInfo si el fetch es ok
+//tomo form e input
+const form = document.querySelector('form');
+const searchInput = document.getElementById('searchInput');
+const resultsList = document.getElementById('results');
+
+form.addEventListener('submit', function(event) {
+    //para prevenir errores
+    event.preventDefault();
+    //tomo el valor del input con lowercase
+    const searchTerm = searchInput.value.toLowerCase();
+    const results = [];
+    //fetch al json
+    fetch('./json/db.json')
+      .then(response => response.json())
+      .then(data => {
+        //for recorriendo data
+        for (let i = 0; i < data.length; i++) {
+          for (let key in data[i]) {
+            //condicional para ver si incluye el input
+            if (data[i][key].toLowerCase().includes(searchTerm)) {
+              results.push(data[i]);
+              break;
+            }
+          }
+        }
+        
+        displayResults(results);
+      })
+      .catch(error => console.log(error));
+
 });
+
 
 const modoBtn = document.getElementById('modoBtn');
 const body = document.body;

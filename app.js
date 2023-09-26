@@ -75,11 +75,16 @@ modoBtn.addEventListener('click', () => {
     if (body.classList.contains('modo-dia')) {
         body.classList.remove('modo-dia');
         body.classList.add('modo-noche');
-        modoBtn.textContent = 'Modo Día';
     } else {
         body.classList.remove('modo-noche');
         body.classList.add('modo-dia');
-        modoBtn.textContent = 'Modo Noche';
     }
+});
+
+const btnOscuro = document.querySelector('#modoBtn');
+
+btnOscuro.addEventListener('click', ()=>{
+    document.body.classList.toggle('oscuro');
+    btnOscuro.classList.toggle('active');
 });
 

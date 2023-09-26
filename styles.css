@@ -3,19 +3,45 @@ body {
           transition: background-color 0.3s, color 0.3s;
           text-align: center;
       }
-      
-      .container {
-          padding: 20px;
+      .modo-btn{
+        float: right;
+        background-color: rgb(38, 106, 148);
+        display: flex;
+        outline: none;
+        border: none;
+        border-radius: 1000px;
+        position: relative;
+        cursor: pointer;
+        width: 60px;
       }
-      
-      .modo-btn {
-          background-color: #007BFF;
-          color: #fff;
-          border: none;
-          padding: 10px 20px;
-          cursor: pointer;
+      .modo-btn::after{
+        content: "";
+        display: block;
+        width: 30px;
+        height: 32px;
+        position: absolute;
+        background: rgb(61, 61, 61);
+        top: 0;
+        left: 0;
+        right: unset;
+        border-radius: 100px;
+        transition: .5s ease all;
       }
-      
+      .modo-btn.active{
+        background-color: orange;
+      }
+      .modo-btn.active::after{
+        right: 0;
+        left: unset;
+      }
+      .modo-btn span{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        display: block;
+        background: none;
+        color: black;
+      }
       .modo-dia {
           background-color: #fff;
           color: #333;

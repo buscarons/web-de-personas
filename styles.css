@@ -1,0 +1,27 @@
+body {
+          font-family: Arial, sans-serif;
+          transition: background-color 0.3s, color 0.3s;
+          text-align: center;
+      }
+      
+      .container {
+          padding: 20px;
+      }
+      
+      .modo-btn {
+          background-color: #007BFF;
+          color: #fff;
+          border: none;
+          padding: 10px 20px;
+          cursor: pointer;
+      }
+      
+      .modo-dia {
+          background-color: #fff;
+          color: #333;
+      }
+      
+      .modo-noche {
+          background-color: #333;
+          color: #fff;
+      }

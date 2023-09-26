@@ -14,7 +14,10 @@ function buscarInfo() {
     })
 }
 
-document.addEventListener("DOMContentLoaded", buscarInfo);
+document.addEventListener("DOMContentLoaded", function(e) {
+    // Funcion fetch que llama a buscarInfo si el fetch es ok
+});
+
 const modoBtn = document.getElementById('modoBtn');
 const body = document.body;
 

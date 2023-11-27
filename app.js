@@ -30,6 +30,7 @@ function displayResults(results) {
       results.forEach(result => {
         const li = document.createElement('li');
         li.textContent = `Nombre: ${result.name}, Telefono: ${result.phone}, Ciudad: ${result.country}`;
+        li.classList.add('buscados')
         resultsList.appendChild(li);
       });
     }

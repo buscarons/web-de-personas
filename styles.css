@@ -46,8 +46,15 @@ body {
           background-color: #fff;
           color: #333;
       }
+.modo-dia .buscados {
+      color: red;
+      }
       
 .modo-noche {
           background-color: #333;
           color: #fff;
+      }
+
+.modo-noche .buscados{
+      color: orange;
       }

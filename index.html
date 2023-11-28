@@ -3,41 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/875d38da57.js" crossorigin="anonymous"></script>
-    <title>Modo Día/Noche</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
+    <title>Web de personas</title>
 </head>
 <body class="modo-dia">
     <header>
         <nav id="nav-bar">
             <div class="container">
-                <button id="modoBtn" class="modo-btn">
+                <button id="modoBtn" class="modo-btn m-1">
                     <span><i class="fa-regular fa-sun"></i></span>
                     <span><i class="fa-solid fa-moon"></i></span>
                 </button>
+                <form role="search">
+                    <input class="form form-control" type="text" id="searchInput" placeholder="Search...">
+                    <button class="btn btn-outline-success m-2 fw-bold" type="submit">Search</button>
+                </form>
             </div>
         </nav>
         
     </header>
-
+    
     <main id="principal">
-        <section id="buscador">
-            <form>
-                <input type="text" id="searchInput" placeholder="Buscar...">
-                <button type="submit">Buscar</button>
-            </form>
-            <ul id="results"></ul>
-
-        </section>
-
         <section id="contenedor">
-            <div id="container">
-
+            <div class="alert alert-danger visually-hidden" id="alert-error" role="alert">
+                There are no results to show...
+            </div>
+            <div class="d-flex flex-wrap justify-content-center" id="people">
             </div>
         </section>
     </main>
-        
 </body>
-<script src="app.js" defer></script>
+<script src="https://kit.fontawesome.com/875d38da57.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script src="app.js"></script>
 </html>
 

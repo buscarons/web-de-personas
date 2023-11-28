@@ -1,90 +1,149 @@
+// GET PEOPLE DATA
+// Elements
+const peopleData = document.getElementById('people');
+
+// Fetch people function
 async function fetchData() {
-    try {
-        //tomo el archivo json
-      const response = await fetch('./json/db.json');
-      const data = await response.json();
-        //div con id container
-      const container = document.getElementById('container');
-        //for para recorrer el json y mostrar los datos
-      for (let i = 0; i < data.length; i++) {
-        const li = document.createElement('li');
-        li.innerText = `Nombre: ${data[i].name}, Telefono: ${data[i].phone}, Ciudad: ${data[i].country}`;
-        container.appendChild(li);
-      }
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const response = await fetch('https://api.npoint.io/3692c8a1c9c3f5da1727');
+    const data = await response.json();
+    console.log(data)
+
+    data.forEach(person => {
+      peopleData.innerHTML += `
+      <div class="card m-1" style="width: 18rem;">
+        <img src="https://robohash.org/${Math.random()}?set=set2" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title fw-bold">${person.name}</h5>
+          <hr>
+          <p class="card-text"><span class="fw-bold">Country</span>: ${person.country}</p>
+          <hr>
+          <p class="card-text"><span class="fw-bold">Phone</span>: ${person.phone}</p>
+        </div>
+      </div>`
+    })
+    darkM();
+  } catch (error) {
+    console.log(error);
   }
+};
 
 fetchData();
 
-  
+// SEARCH PEOPLE
+// Elements
+const form = document.querySelector('form');
+const searchInput = document.getElementById('searchInput');
+
+// Alert
+const alert = document.getElementById('alert-error');
+
+function showAlert() {
+  alert.classList.remove('visually-hidden');
+  setTimeout(() => {
+    alert.classList.add('visually-hidden')
+  }, 5000);
+}
+
+// Display search results 
 function displayResults(results) {
-    resultsList.innerHTML = '';
+    peopleData.innerHTML = '';
   
     if (results.length === 0) {
-      const li = document.createElement('li');
-      li.textContent = 'No se encontraron resultados';
-      resultsList.appendChild(li);
+      showAlert();
     } else {
-      results.forEach(result => {
-        const li = document.createElement('li');
-        li.textContent = `Nombre: ${result.name}, Telefono: ${result.phone}, Ciudad: ${result.country}`;
-        resultsList.appendChild(li);
+      results.forEach(person => {
+        peopleData.innerHTML += `
+        <div class="card m-1" style="width: 18rem;">
+          <img src="https://robohash.org/${Math.random()}?set=set2" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">${person.name}</h5>
+            <hr>
+            <p class="card-text"><span class="fw-bold">Country</span>: ${person.country}</p>
+            <hr>
+            <p class="card-text"><span class="fw-bold">Phone</span>: ${person.phone}</p>
+          </div>
+        </div>
+        `
       });
+      darkM();
     }
 }
 
-//tomo form e input
-const form = document.querySelector('form');
-const searchInput = document.getElementById('searchInput');
-const resultsList = document.getElementById('results');
-
+// Event handler search person
 form.addEventListener('submit', function(event) {
-    //para prevenir errores
-    event.preventDefault();
-    //tomo el valor del input con lowercase
-    const searchTerm = searchInput.value.toLowerCase();
-    const results = [];
-    //fetch al json
-    fetch('./json/db.json')
-      .then(response => response.json())
-      .then(data => {
-        //for recorriendo data
-        for (let i = 0; i < data.length; i++) {
-          for (let key in data[i]) {
-            //condicional para ver si incluye el input
-            if (data[i][key].toLowerCase().includes(searchTerm)) {
-              results.push(data[i]);
-              break;
-            }
+  event.preventDefault();
+
+  const searchTerm = searchInput.value.toLowerCase();
+  const results = [];
+
+  fetch('https://api.npoint.io/3692c8a1c9c3f5da1727')
+    .then(response => response.json())
+    .then(data => {
+      data.forEach(person => {
+        if (searchTerm !== '') {
+          if (person.name.toLowerCase().includes(searchTerm) ||
+            person.country.toLowerCase().includes(searchTerm)) {
+            results.push(person)
           }
         }
-        
-        displayResults(results);
       })
-      .catch(error => console.log(error));
-
+      console.log(results);
+      displayResults(results);
+      darkM();
+    })
+    .catch(error => {
+      console.log(error);
+      showAlert();
+    });
 });
 
+// DARK MODE FUNCTIONALITY
+// Elements
 
-const modoBtn = document.getElementById('modoBtn');
-const body = document.body;
-
-modoBtn.addEventListener('click', () => {
-    if (body.classList.contains('modo-dia')) {
-        body.classList.remove('modo-dia');
-        body.classList.add('modo-noche');
-    } else {
-        body.classList.remove('modo-noche');
-        body.classList.add('modo-dia');
-    }
-});
-
-const btnOscuro = document.querySelector('#modoBtn');
-
-btnOscuro.addEventListener('click', ()=>{
-    document.body.classList.toggle('oscuro');
-    btnOscuro.classList.toggle('active');
-});
+// Dark mode function
+function darkM() {
+  const modeBtn = document.getElementById('modoBtn');
+  const body = document.body;
+  const card = document.querySelectorAll('.card');
+  
+  // Set previous dark mode preference
+  if (localStorage.getItem('darkMode') === 'true') {
+    modeBtn.classList.add('active');
+    body.classList.remove('modo-dia');
+    body.classList.add('modo-noche');
+    card.forEach(elem => {
+      elem.classList.add('card-noche')
+    })
+  } else {
+    modeBtn.classList.remove('active')
+    body.classList.add('modo-dia');
+    body.classList.remove('modo-noche')
+    card.forEach(elem => {
+      elem.classList.remove('card-noche')
+    })
+  }
+  
+  modeBtn.addEventListener('click', () => {
+      if (body.classList.contains('modo-dia')) {
+          body.classList.remove('modo-dia');
+          body.classList.add('modo-noche');
+          card.forEach(elem => {
+            elem.classList.add('card-noche')
+          })
+          localStorage.setItem('darkMode', true);
+      } else {
+          body.classList.remove('modo-noche');
+          body.classList.add('modo-dia');
+          card.forEach(elem => {
+            elem.classList.remove('card-noche')
+          })
+          localStorage.setItem('darkMode', false)
+      }
+  });
+  
+  modeBtn.addEventListener('click', ()=>{
+      modeBtn.classList.toggle('active');
+  });
+}
 
